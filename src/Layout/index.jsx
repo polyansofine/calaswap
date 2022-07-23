@@ -1,15 +1,16 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import SidebarWrapper from "./SidebarWrapper";
-
-const Layout = ({ children }) => {
+import { Outlet } from "react-router-dom";
+const Layout = () => {
   return (
     <Grid container>
-      <Grid item width="300px">
+      <Grid item>
         <SidebarWrapper />
       </Grid>
-      <Grid item md="auto" xs="auto">
-        {children}
+      <Grid item>
+        {/* {children} */}
+        <Outlet />
       </Grid>
     </Grid>
   );

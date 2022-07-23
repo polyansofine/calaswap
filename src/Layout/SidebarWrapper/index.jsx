@@ -4,8 +4,9 @@ import { styled } from "@mui/material/styles";
 import { SIDEBAR } from "constant/sidebar";
 import SidebarItem from "./SidebarItem";
 import Logo from "./Logo";
+import { List } from "@mui/material";
 const Root = styled(`div`)(({ theme }) => ({
-  width: "100%",
+  width: "300px",
   height: "100%",
   minHeight: "100vh",
   padding: "23px 34px",
@@ -18,9 +19,11 @@ const SidebarWrapper = () => {
   return (
     <Root>
       <Logo />
-      {SIDEBAR.map((item, index) => (
-        <SidebarItem item={item} key={index} />
-      ))}
+      <List>
+        {SIDEBAR.map((item, index) => (
+          <SidebarItem item={item} key={index} />
+        ))}
+      </List>
     </Root>
   );
 };

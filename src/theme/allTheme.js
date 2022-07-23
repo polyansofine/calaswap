@@ -17,6 +17,19 @@ const allTheme = createTheme({
       fontSize: "32px",
       fontWeight: 800,
     },
+    h1: {
+      fontSize: "60px",
+      fontWeight: 800,
+      color: "#ffffff",
+    },
+    h4: {
+      fontSize: "26px",
+      color: "#ffffff",
+    },
+    body1: {
+      fontSize: "20px",
+      color: "#ffffff",
+    },
   },
 });
 export default allTheme;
