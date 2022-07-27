@@ -4,11 +4,11 @@ import SidebarWrapper from "./SidebarWrapper";
 import { Outlet } from "react-router-dom";
 const Layout = () => {
   return (
-    <Grid container>
-      <Grid item>
+    <Grid container flexDirection="row">
+      <Grid item xs={2} minWidth="300px">
         <SidebarWrapper />
       </Grid>
-      <Grid item>
+      <Grid item xs>
         {/* {children} */}
         <Outlet />
       </Grid>

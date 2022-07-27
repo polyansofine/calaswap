@@ -6,7 +6,6 @@ import SidebarItem from "./SidebarItem";
 import Logo from "./Logo";
 import { List } from "@mui/material";
 const Root = styled(`div`)(({ theme }) => ({
-  width: "300px",
   height: "100%",
   minHeight: "100vh",
   padding: "23px 34px",
