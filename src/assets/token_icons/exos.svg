@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="36" height="36" viewBox="0 0 36 36">
+  <defs>
+    <linearGradient id="linear-gradient" x1="-0.053" y1="0.5" x2="1.469" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#3d5eff"/>
+      <stop offset="0.7" stop-color="#a4b1ff"/>
+      <stop offset="1" stop-color="#bac7ff"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="0.5" y1="0.374" x2="0.5" y2="0.789" xlink:href="#linear-gradient"/>
+    <linearGradient id="linear-gradient-3" x1="0.895" y1="0.5" x2="0.031" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#3d5eff"/>
+      <stop offset="1" stop-color="#a4b1ff"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-4" x1="0.5" y1="1.006" x2="0.5" y2="0.032" xlink:href="#linear-gradient"/>
+  </defs>
+  <g id="Group_11" data-name="Group 11" transform="translate(206 -578)">
+    <g id="Ellipse_1" data-name="Ellipse 1" transform="translate(-204 580)" fill="#f3f6ff" stroke="#fff" stroke-width="2">
+      <circle cx="16" cy="16" r="16" stroke="none"/>
+      <circle cx="16" cy="16" r="17" fill="none"/>
+    </g>
+    <g id="Group_10" data-name="Group 10" transform="translate(-29 1)">
+      <rect id="Rectangle_21" data-name="Rectangle 21" width="20" height="20" transform="translate(-169 585)" fill="none"/>
+      <g id="레이어_1" data-name="레이어 1" transform="translate(-167.66 585)">
+        <g id="Group_9" data-name="Group 9">
+          <path id="Path_19" data-name="Path 19" d="M102.468,151.579l-3.249,1.876-.009-.005v3.767l3.258-1.881,2.144-1.238V150.34Z" transform="translate(-90.55 -137.216)" fill="url(#linear-gradient)"/>
+          <path id="Path_20" data-name="Path 20" d="M104.612,3.119h0l-2.144-1.238L99.21,0V16.233l.009.005,3.249-1.876V5.637l2.144,1.239h0v10L107.87,15V5Z" transform="translate(-90.55)" fill="url(#linear-gradient-2)"/>
+          <path id="Path_21" data-name="Path 21" d="M3.258,26.545h0L5.4,25.306V21.55L3.258,22.788h0L0,24.669v10L3.258,36.55h0L5.4,37.788V34.031L3.258,32.793h0Z" transform="translate(0 -19.669)" fill="url(#linear-gradient-3)"/>
+          <path id="Path_22" data-name="Path 22" d="M61.89,1.881V18.119L65.148,20V0Z" transform="translate(-56.487)" fill="url(#linear-gradient-4)"/>
+        </g>
+      </g>
+    </g>
+    <g id="exos" transform="translate(-204 580)">
+      <circle id="Ellipse_3" data-name="Ellipse 3" cx="16" cy="16" r="16" fill="#13171d"/>
+      <path id="Path_254" data-name="Path 254" d="M13.573,5H7.28a1,1,0,0,0,.187.56,1.893,1.893,0,0,0,.893.773c.64.293,1.333.56,1.947.827.133,0,.213.107.227.267.16,1.333,2.453,16.44,2.667,18.04,0,.307,0,.813.387.813s.347-.507.387-.813c.213-1.6,2.507-16.76,2.667-18.04,0-.16.093-.213.227-.267.653-.267,1.333-.533,1.947-.827a1.893,1.893,0,0,0,.893-.76A1.12,1.12,0,0,0,19.893,5Z" transform="translate(2.427 1.667)" fill="#00e7d7"/>
+    </g>
+  </g>
+</svg>

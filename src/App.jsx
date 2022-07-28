@@ -4,6 +4,7 @@ import Layout from "Layout";
 import { ThemeProvider } from "@mui/material";
 import allTheme from "theme/allTheme";
 import HomePage from "page/main";
+import Farm from "page/farm";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
+            <Route path="farming" element={<Farm />} />
           </Route>
         </Routes>
       </BrowserRouter>
