@@ -7,11 +7,15 @@ import HomeHeaderTitle from "./HomeHeaderTitle";
 const HomeHeader = () => {
   return (
     <HeaderLayout>
-      <Grid container justifyContent="space-between" alignItems="center">
+      <Grid
+        container
+        columnSpacing={{ xl: 16, lg: 3, md: 2 }}
+        alignItems="center"
+      >
         <Grid item md={5} lg={5}>
           <HomeHeaderTitle />
         </Grid>
-        <Grid item md={6} lg={6}>
+        <Grid item md={7} lg={7}>
           <HomeHeaderContent />
         </Grid>
       </Grid>

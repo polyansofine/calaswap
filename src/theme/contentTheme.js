@@ -1,5 +1,14 @@
 import { createTheme } from "@mui/material/styles";
 const contentTheme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1450,
+      xl: 1700,
+    },
+  },
   palette: {
     primary: {
       main: "#FEAD50",
@@ -20,25 +29,25 @@ const contentTheme = createTheme({
   },
   typography: {
     h3: {
-      fontSize: "28px",
+      fontSize: "1.75rem",
       fontWeight: 600,
     },
     h2: {
-      fontSize: "32px",
+      fontSize: "2rem",
       fontWeight: 800,
     },
     h1: {
-      fontSize: "60px",
+      fontSize: "3.75rem",
       fontWeight: 800,
     },
     h4: {
-      fontSize: "26px",
+      fontSize: "1.625rem",
     },
     body1: {
-      fontSize: "20px",
+      fontSize: "1.25rem",
     },
     caption: {
-      fontSize: "14px",
+      fontSize: "0.875rem",
     },
   },
 });

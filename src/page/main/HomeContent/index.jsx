@@ -8,13 +8,16 @@ import myce from "assets/token_icons/myce.svg";
 const Root = styled("div")(({ theme }) => ({
   background: "#F1F3FF",
   padding: "59px 136px",
+  [theme.breakpoints.down("lg")]: {
+    padding: "29px 40px",
+  },
   marginTop: "40px",
   marginBottom: "-23px",
 }));
 const HomeContent = () => {
   return (
     <Root>
-      <Grid container columnSpacing={14}>
+      <Grid container columnSpacing={{ xl: 14, lg: 8, md: 6 }}>
         <Grid item md={6}>
           <Typography variant="h3">Earn CLS + Fees in Farms</Typography>
           <PairListItem icon={holder} title="Holder Pool" value="62.89%" />

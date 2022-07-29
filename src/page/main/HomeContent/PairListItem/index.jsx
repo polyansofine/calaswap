@@ -10,6 +10,9 @@ const Root = styled("div")(({ theme }) => ({
   background: "white",
   //   width: "100%",
   padding: "0px 40px",
+  [theme.breakpoints.down("lg")]: {
+    padding: "0px 20px",
+  },
   marginTop: "40px",
 }));
 

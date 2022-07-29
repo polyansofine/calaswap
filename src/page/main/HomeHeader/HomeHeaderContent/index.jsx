@@ -7,7 +7,7 @@ import { Grid } from "@mui/material";
 const HomeHeaderContent = () => {
   return (
     <div>
-      <Grid container columnSpacing={2} direction="row" alignItems="stretch">
+      <Grid container columnSpacing={1} direction="row" alignItems="stretch">
         <Grid item md={6}>
           <HomeHeaderItem
             title="Low Fee"
