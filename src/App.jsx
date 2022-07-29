@@ -5,6 +5,7 @@ import { ThemeProvider } from "@mui/material";
 import allTheme from "theme/allTheme";
 import HomePage from "page/main";
 import Farm from "page/farm";
+import Pools from "page/pools";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
             <Route path="farming" element={<Farm />} />
+            <Route path="pooling" element={<Pools />} />
           </Route>
         </Routes>
       </BrowserRouter>

@@ -45,13 +45,14 @@ const rows = [
   createData("Eclair", 262, 16.0, 24, 6.0),
   createData("Cupcake", 305, 3.7, 67, 4.3),
   createData("Gingerbread", 356, 16.0, 49, 3.9),
+  createData("Gingerbread", 356, 16.0, 49, 3.9),
 ];
 
-export default function FarmTable() {
+export default function PoolTable() {
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
+        {/* <TableHead>
           <TableRow>
             <StyledTableCell>Dessert (100g serving)</StyledTableCell>
             <StyledTableCell align="right">Calories</StyledTableCell>
@@ -59,7 +60,7 @@ export default function FarmTable() {
             <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
             <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
           </TableRow>
-        </TableHead>
+        </TableHead> */}
         <TableBody>
           {rows.map((row) => (
             <StyledTableRow key={row.name}>
