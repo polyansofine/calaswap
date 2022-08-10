@@ -10,6 +10,7 @@ const SidebarItem = ({ item }) => {
         onClick={() => {
           navigate(`${item.name}`);
         }}
+        sx={{ cursor: "pointer" }}
       >
         <Grid container alignItems="center" columnSpacing={2}>
           <Grid item>

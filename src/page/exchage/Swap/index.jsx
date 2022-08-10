@@ -1,11 +1,13 @@
 import { Button, Grid, InputBase, styled, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import usdt from "assets/token_icons/usdt.svg";
 import arrows from "assets/icons/arrows.svg";
 import holder from "assets/token_icons/holder.svg";
 import arrows_horizontal from "assets/icons/arrows_horizontal.svg";
+import TokenSearchModal from "components/token_modal";
+import { useSelector } from "react-redux";
 
 const StyledDiv = styled("div")(({ theme }) => ({
   border: "2px solid #cccccc",
@@ -44,6 +46,12 @@ const CoinButton = React.forwardRef(({ src, children, ...rest }, ref) => {
 });
 
 const Swap = () => {
+  const [open, setOpen] = useState(false);
+  const [token_index, setTokenIndex] = useState(0);
+  const { token0, token1 } = useSelector(
+    ({ tokenReducers }) => tokenReducers.token
+  );
+
   return (
     <div>
       <Grid
@@ -77,7 +85,15 @@ const Swap = () => {
             <Button>MAX</Button>
           </Grid>
           <Grid item>
-            <CoinButton src={usdt}>BNB</CoinButton>
+            <CoinButton
+              src={`/images/tokens/${token0.address}.png`}
+              onClick={() => {
+                setOpen(true);
+                setTokenIndex(0);
+              }}
+            >
+              {token0.title}
+            </CoinButton>
           </Grid>
         </Grid>
         <Grid container justifyContent="space-between">
@@ -109,7 +125,15 @@ const Swap = () => {
             <Button>MAX</Button>
           </Grid>
           <Grid item>
-            <CoinButton src={holder}>CLS</CoinButton>
+            <CoinButton
+              src={`/images/tokens/${token1.address}.png`}
+              onClick={() => {
+                setOpen(true);
+                setTokenIndex(1);
+              }}
+            >
+              {token1.title}
+            </CoinButton>
           </Grid>
         </Grid>
         <Grid container justifyContent="space-between">
@@ -172,6 +196,11 @@ const Swap = () => {
           <Typography variant="body2">524.3 CLS</Typography>
         </Grid>
       </StyledInfo>
+      <TokenSearchModal
+        open={open}
+        handleClose={() => setOpen(false)}
+        token_index={token_index}
+      />
     </div>
   );
 };
