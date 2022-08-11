@@ -49,10 +49,10 @@ const TokenSearchModal = ({ open, handleClose, token_index, type }) => {
         style: {
           width: "30%",
           minWidth: "300px",
-          borderRadius: 3,
+          borderRadius: 12,
           border: "#666 1px solid",
           background: "#026",
-          color: "white",
+          color: "#fff",
         },
       }}
       sx={{
@@ -78,7 +78,7 @@ const TokenSearchModal = ({ open, handleClose, token_index, type }) => {
             ? `${"Only tokens that paired with "}${
                 token_index === 0 ? token1.title : token0.title
               }${" are listed"}`
-            : "The following tokens are listed in TiFi Bank"}
+            : "The following tokens are listed in CLS Bank"}
         </Typography>
         <TextField
           sx={{

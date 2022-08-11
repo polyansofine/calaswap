@@ -9,7 +9,7 @@ export const getErrorMessage = (error) => {
     return "You are not on the BSC main net. Please switch to the main net.";
   }
   if (error.code === "CALL_EXCEPTION") {
-    if (error.reason === "TiFiLibrary: IDENTICAL_ADDRESSES") {
+    if (error.reason === "CLSLibrary: IDENTICAL_ADDRESSES") {
       return "You have selected the same tokens, please select a different token.";
     }
     return "The pair doesn't exist, please select another pair.";

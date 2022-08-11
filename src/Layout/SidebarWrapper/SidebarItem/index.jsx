@@ -1,4 +1,11 @@
-import { ListItem, Grid, Typography } from "@mui/material";
+import {
+  ListItem,
+  Grid,
+  Typography,
+  ListItemIcon,
+  ListItemButton,
+  ListItemText,
+} from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -6,22 +13,17 @@ const SidebarItem = ({ item }) => {
   const navigate = useNavigate();
   return (
     <div style={{ marginTop: "30px" }}>
-      <ListItem
-        onClick={() => {
-          navigate(`${item.name}`);
-        }}
-        sx={{ cursor: "pointer" }}
-      >
-        <Grid container alignItems="center" columnSpacing={2}>
-          <Grid item>
+      <ListItem key={item.name} disablePadding>
+        <ListItemButton
+          onClick={() => {
+            navigate(`${item.name}`);
+          }}
+        >
+          <ListItemIcon>
             <img src={item.icon} alt={item.name} />
-          </Grid>
-          <Grid item>
-            <Typography variant="h3" sx={{ textTransform: "capitalize" }}>
-              {item.name}
-            </Typography>
-          </Grid>
-        </Grid>
+          </ListItemIcon>
+          <ListItemText primary={item.name} />
+        </ListItemButton>
       </ListItem>
     </div>
   );

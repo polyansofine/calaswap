@@ -1,36 +1,27 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "Layout";
-import { responsiveFontSizes, ThemeProvider } from "@mui/material";
-import allTheme from "theme/allTheme";
-import HomePage from "page/main";
-import Farm from "page/farm";
-import Pools from "page/pools";
-import Exchange from "page/exchage";
 import { Provider } from "react-redux";
 import store from "store/store";
+import { ThemeProvider } from "styled-components";
+// import { ModalProvider, dark } from "@pancakeswap/uikit";
+import { Web3ReactProvider } from "@web3-react/core";
+import Routers from "routers";
+import { getLibrary } from "components/WalletConnectButton/utils/web3React";
+
+// const ThemeProviderWrapper = (props) => {
+//   return <ThemeProvider theme={dark} {...props} />;
+// };
 
 function App() {
   return (
-    <Provider store={store}>
-      <ThemeProvider
-        theme={responsiveFontSizes(allTheme, {
-          breakpoints: ["xs", "sm", "md", "lg", "xl"],
-          factor: 5,
-        })}
-      >
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<HomePage />} />
-              <Route path="farming" element={<Farm />} />
-              <Route path="pooling" element={<Pools />} />
-              <Route path="exchange" element={<Exchange />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
-      </ThemeProvider>
-    </Provider>
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <Provider store={store}>
+        {/* <ThemeProviderWrapper>
+          <ModalProvider> */}
+        <Routers />
+        {/* </ModalProvider>
+        </ThemeProviderWrapper> */}
+      </Provider>
+    </Web3ReactProvider>
   );
 }
 
