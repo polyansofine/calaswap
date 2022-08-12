@@ -1,4 +1,5 @@
 import { CssBaseline, responsiveFontSizes, ThemeProvider } from "@mui/material";
+import FuseMessage from "components/FuseMessage";
 import Exchange from "page/exchage";
 import Farm from "page/farm";
 import HomePage from "page/main";
@@ -27,6 +28,7 @@ const Routers = () => {
             <Route path="exchange" element={<Exchange />} />
           </Route>
         </Routes>
+        <FuseMessage />
       </BrowserRouter>
     </ThemeProvider>
   );

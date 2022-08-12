@@ -59,7 +59,7 @@ const WalletConnect = ({ type }) => {
     try {
       await library.provider.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: toHex(56) }],
+        params: [{ chainId: toHex(97) }],
       });
     } catch (switchError) {
       // This error code indicates that the chain has not been added to MetaMask.
@@ -69,10 +69,10 @@ const WalletConnect = ({ type }) => {
             method: "wallet_addEthereumChain",
             params: [
               {
-                chainId: toHex(56),
+                chainId: toHex(97),
                 chainName: "Binance",
-                rpcUrls: ["https://bsc-dataseed.binance.org"],
-                blockExplorerUrls: ["https://bscscan.com/"],
+                rpcUrls: ["https://data-seed-prebsc-1-s3.binance.org:8545"],
+                blockExplorerUrls: ["https://testnet.bscscan.com/"],
               },
             ],
           });

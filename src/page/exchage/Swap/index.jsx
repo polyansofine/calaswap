@@ -1,9 +1,24 @@
-import { Button, Grid, InputBase, styled, Typography } from "@mui/material";
-import React, { useState } from "react";
+import {
+  Button,
+  CircularProgress,
+  Collapse,
+  Fab,
+  Grid,
+  IconButton,
+  InputBase,
+  styled,
+  Tooltip,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import React, { useEffect, useState } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import SwapVertIcon from "@mui/icons-material/SwapVert";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import HelpIcon from "@mui/icons-material/Help";
 
-import arrows from "assets/icons/arrows.svg";
+// import arrows from "assets/icons/arrows.svg";
 import arrows_horizontal from "assets/icons/arrows_horizontal.svg";
 import TokenSearchModal from "components/token_modal";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,6 +39,9 @@ import { CONTRACT_ADDRESS } from "constant/contract_address";
 import RouterABI from "contract/abi/CLSRouter.json";
 import { BASE_BSC_SCAN_URLS } from "components/WalletConnectButton/config";
 import getPrice from "contract/abi/GetPrice.json";
+import metamask from "assets/icons/Metamask-icon.svg";
+import CachedIcon from "@mui/icons-material/Cached";
+import WalletConnect from "components/WalletConnect";
 
 const StyledDiv = styled("div")(({ theme }) => ({
   border: "2px solid #cccccc",
@@ -38,6 +56,7 @@ const StyledInfo = styled("div")(({ theme }) => ({
 
 const StyledInput = styled(InputBase)(({ theme }) => ({
   color: "#000",
+  fontWeight: 600,
 }));
 
 const CoinButton = React.forwardRef(({ src, children, ...rest }, ref) => {
@@ -82,6 +101,8 @@ const Swap = () => {
   const [priceImpact, setPriceImpact] = useState();
   const [swapPath, setSwapPath] = useState([]);
   const [extraReserve, setExtraReserve] = useState([]);
+  const theme = useTheme();
+
   const { address, provider } = useSelector(
     ({ authReducers }) => authReducers.auth.auth
   );
@@ -722,6 +743,40 @@ const Swap = () => {
     }
   };
 
+  useEffect(() => {
+    const getData = async () => {
+      await getBalance(token0, 0);
+      await getBalance(token1, 1);
+    };
+    setPrice0(0);
+    setPrice1(0);
+    setSwapPath(getTokenPath(token0.title, token1.title));
+    getTokenReserves(token0.address, token1.address);
+    if (address && provider) {
+      getData();
+    } else {
+      setBalance(0);
+      setBalance1(0);
+    }
+  }, [
+    address,
+    provider,
+    token0,
+    token1,
+    getBalance,
+    getTokenReserves,
+    reserve0,
+    reserve1,
+  ]);
+  const getSwapFee = () => {
+    let fee = price0 / 500;
+    if (extraReserve.length > 0) {
+      fee *= 1.998;
+    }
+    return toFixed(fee);
+  };
+
+  const price = perPrice[refresh ? 0 : 1];
   return (
     <div>
       <Grid
@@ -744,15 +799,43 @@ const Swap = () => {
             <Typography>From</Typography>
           </Grid>
           <Grid item>
-            <Typography> Balance:0</Typography>
+            <Grid container justifyContent="flex-end" alignItems="center">
+              <Grid item>
+                {token0.title !== "BNB" && (
+                  <IconButton onClick={() => handleAddToken(0)}>
+                    <img
+                      src={metamask}
+                      alt="metamask"
+                      width="20px"
+                      height="20px"
+                    />
+                  </IconButton>
+                )}
+              </Grid>
+              <Grid item>
+                <Typography>
+                  {" "}
+                  Balance:
+                  <span style={{ fontWeight: 600 }}>
+                    {Math.round(balance * 1000000000) / 1000000000 || 0}
+                  </span>
+                </Typography>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
         <Grid container>
           <Grid item md>
-            <StyledInput fullWidth />
+            <StyledInput
+              placeholder="0.00"
+              fullWidth
+              // type="number"
+              value={isNaN(price0) ? 0 : price0}
+              onChange={(e) => handleChange(e, 0)}
+            />
           </Grid>
           <Grid item>
-            <Button>MAX</Button>
+            <Button onClick={() => handleMax(0)}>MAX</Button>
           </Grid>
           <Grid item>
             <CoinButton
@@ -776,7 +859,18 @@ const Swap = () => {
         </Grid>
       </StyledDiv>
       <Grid container justifyContent="center" sx={{ my: 3 }}>
-        <img src={arrows} alt="arrows" style={{ cursor: "pointer" }} />
+        <Fab
+          size="small"
+          onClick={() => {
+            setRefresh(false);
+            setPriceImpact("NA");
+            dispatch(fuseActions.selectToken(token1, token0));
+          }}
+          onMouseEnter={() => setHoverOnSwitch(true)}
+          onMouseLeave={() => setHoverOnSwitch(false)}
+        >
+          {hoverOnSwitch ? <SwapVertIcon /> : <ArrowDownwardIcon />}
+        </Fab>
       </Grid>
       <StyledDiv>
         <Grid container justifyContent="space-between">
@@ -784,15 +878,42 @@ const Swap = () => {
             <Typography>To(estimated)</Typography>
           </Grid>
           <Grid item>
-            <Typography> Balance:0</Typography>
+            <Grid container justifyContent="flex-end" alignItems="center">
+              <Grid item>
+                {token1.title !== "BNB" && (
+                  <IconButton onClick={() => handleAddToken(1)}>
+                    <img
+                      src={metamask}
+                      alt="metamask"
+                      width="20px"
+                      height="20px"
+                    />
+                  </IconButton>
+                )}
+              </Grid>
+              <Grid item>
+                <Typography>
+                  {" "}
+                  Balance:
+                  <span style={{ fontWeight: 600 }}>
+                    {Math.round(balance1 * 1000000000) / 1000000000 || 0}
+                  </span>
+                </Typography>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
         <Grid container>
           <Grid item md>
-            <StyledInput fullWidth />
+            <StyledInput
+              fullWidth
+              placeholder="0.00"
+              value={isNaN(price1) ? 0 : price1}
+              onChange={(e) => handleChange(e, 1)}
+            />
           </Grid>
           <Grid item>
-            <Button>MAX</Button>
+            <Button onClick={() => handleMax(1)}>MAX</Button>
           </Grid>
           <Grid item>
             <CoinButton
@@ -815,56 +936,171 @@ const Swap = () => {
           </Grid>
         </Grid>
       </StyledDiv>
-      <Grid
-        container
-        justifyContent="space-between"
-        alignItems="center"
-        sx={{ mt: 1 }}
+      <Collapse
+        in={price0 !== 0 && price0 !== "" && price1 !== 0 && price1 !== ""}
       >
-        <Grid item>
-          <Typography>Price</Typography>
-        </Grid>
-        <Grid item>
-          <Grid container>
-            <Typography>0.00189212 BNB per CLS</Typography>
-            <img src={arrows_horizontal} alt="arrows_horizontal" />
+        {isNaN(price) ? (
+          ""
+        ) : (
+          <Grid container justifyContent="space-between" alignItems="center">
+            <Grid item>
+              <Typography sx={{ color: "#aaa" }}>{"Price"}</Typography>
+            </Grid>
+            <Grid item>
+              <Grid container alignItems="center">
+                <Grid item>
+                  <Typography sx={{ color: "#aaa" }}>
+                    {price} {refresh ? token1.title : token0.title} {"per"}{" "}
+                    {refresh ? token0.title : token1.title}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <IconButton onClick={() => setRefresh((prev) => !prev)}>
+                    <CachedIcon sx={{ color: "#aaa" }} />
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </Grid>
           </Grid>
-        </Grid>
-      </Grid>
-      <Button fullWidth variant="contained" sx={{ my: 3 }}>
+        )}
+      </Collapse>
+      {address ? (
+        !price0 ? (
+          <Button fullWidth sx={theme.custom.disabledButton} disabled={true}>
+            {"Enter Amount"}
+          </Button>
+        ) : !balance_avaliable || !reserve_available || priceImpact > 20 ? (
+          <Button fullWidth disabled={true} sx={theme.custom.disabledButton}>
+            {!reserve_available
+              ? priceImpact > 20
+                ? "Price Impact Too High"
+                : "Insufficient Liquidity for This Trade"
+              : priceImpact > 20
+              ? "Price Impact Too High"
+              : "Insufficient Balance"}
+          </Button>
+        ) : (
+          <Button
+            onClick={handleSwap}
+            disabled={status}
+            fullWidth
+            sx={theme.custom.swapButton}
+          >
+            {status ? <CircularProgress /> : "Swap"}
+          </Button>
+        )
+      ) : (
+        <WalletConnect type />
+      )}
+      {/* <Button fullWidth variant="contained" sx={{ my: 3 }}>
         Insufficlent BNB balance
-      </Button>
+      </Button> */}
       <StyledInfo>
         <Grid container justifyContent="space-between" alignItems="center">
-          <Typography variant="body2">Minimum received</Typography>
-          <Typography variant="body2">524.3 CLS</Typography>
+          <Grid item>
+            Swap Fee
+            <Tooltip
+              title={
+                <div>
+                  {"Swap Fee is 0.2%, where:"}
+                  <li>{"0.18% is paid to LP Providers"}</li>
+                  <li>{"0.02% to the TiFi treasury"}</li>
+                </div>
+              }
+            >
+              <HelpIcon fontSize="xsmall" />
+            </Tooltip>
+          </Grid>
+          <Grid item>
+            {getSwapFee()} {token0.title}
+          </Grid>
         </Grid>
-        <Grid
-          container
-          justifyContent="space-between"
-          alignItems="center"
-          sx={{ my: 1 }}
-        >
-          <Typography variant="body2">Minimum received</Typography>
-          <Typography variant="body2">524.3 CLS</Typography>
-        </Grid>
+        {isNaN(priceImpact) ? (
+          ""
+        ) : (
+          <Grid container justifyContent="space-between" alignItems="center">
+            <Grid item>
+              Price Impact
+              <Tooltip
+                title={
+                  "The difference between the market price and estimated price due to trade size."
+                }
+              >
+                <HelpIcon fontSize="xsmall" />
+              </Tooltip>
+            </Grid>
+            <Grid item>
+              {priceImpact < 0.01 ? "< 0.01 %" : priceImpact + "%"}
+            </Grid>
+          </Grid>
+        )}
         <Grid container justifyContent="space-between" alignItems="center">
-          <Typography variant="body2">Minimum received</Typography>
-          <Typography variant="body2">524.3 CLS</Typography>
+          <Grid item>
+            {"Route"}{" "}
+            <Tooltip
+              title={
+                "Routing through these tokens resulted in the best price for your trade."
+              }
+            >
+              <HelpIcon fontSize="xsmall" />
+            </Tooltip>
+          </Grid>
+          <Grid item>{swapPath.join(" > ")}</Grid>
         </Grid>
-        <Grid
-          container
-          justifyContent="space-between"
-          alignItems="center"
-          sx={{ my: 1 }}
-        >
-          <Typography variant="body2">Minimum received</Typography>
-          <Typography variant="body2">524.3 CLS</Typography>
-        </Grid>
-        <Grid container justifyContent="space-between" alignItems="center">
-          <Typography variant="body2">Minimum received</Typography>
-          <Typography variant="body2">524.3 CLS</Typography>
-        </Grid>
+        {token0.title === "TIFI" ? (
+          <Grid container justifyContent="space-between" alignItems="center">
+            <Grid item>
+              {"TIFI Sell Fee"}{" "}
+              <Tooltip
+                title={
+                  <div>
+                    {"There is 2% of fee when selling TIFI, check "}
+                    <a
+                      href="https://tifi.net/about/TiFiTokenWhitePaper.pdf"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      {"TiFi Token Whitepaper"}
+                    </a>
+                    {" for more details."}
+                  </div>
+                }
+              >
+                <HelpIcon fontSize="xsmall" />
+              </Tooltip>
+            </Grid>
+            <Grid item>2%</Grid>
+          </Grid>
+        ) : (
+          ""
+        )}
+        {token1.title === "TIFI" ? (
+          <Grid container justifyContent="space-between" alignItems="center">
+            <Grid item>
+              {"TIFI Buy Fee"}
+              <Tooltip
+                title={
+                  <div>
+                    {"There is 1% of fee when buying TIFI, check "}
+                    <a
+                      href="https://tifi.net/about/TiFiTokenWhitePaper.pdf"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      {"TiFi Token Whitepaper"}
+                    </a>
+                    {" for more details."}
+                  </div>
+                }
+              >
+                <HelpIcon fontSize="xsmall" />
+              </Tooltip>
+            </Grid>
+            <Grid item>1%</Grid>
+          </Grid>
+        ) : (
+          ""
+        )}
       </StyledInfo>
       <TokenSearchModal
         open={open}
