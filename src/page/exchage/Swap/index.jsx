@@ -31,7 +31,7 @@ import {
   getTokenPriceUsingAmount,
   toFixed,
   tokenMap,
-} from "utils/tifi";
+} from "utils/cls";
 import { ethers } from "ethers";
 import { minABI } from "constant/CLS_min_abi";
 import getNodeUrl from "components/WalletConnectButton/utils/getRpcUrl";
@@ -494,7 +494,7 @@ const Swap = () => {
                   CONTRACT_ADDRESS.ROUTER_ADDRESS,
                   "1000000000000000000000000000000000000"
                 );
-                tx.wait();
+                await tx.wait();
                 let _interVal = setInterval(async () => {
                   const PriveValBuf = await contract0.allowance(
                     address,
@@ -584,7 +584,7 @@ const Swap = () => {
                   CONTRACT_ADDRESS.ROUTER_ADDRESS,
                   "1000000000000000000000000000000000000"
                 );
-                tx.wait();
+                await tx.wait();
                 let _interVal = setInterval(async () => {
                   const PriveValBuf = await contract0.allowance(
                     address,
@@ -1004,7 +1004,7 @@ const Swap = () => {
                 <div>
                   {"Swap Fee is 0.2%, where:"}
                   <li>{"0.18% is paid to LP Providers"}</li>
-                  <li>{"0.02% to the TiFi treasury"}</li>
+                  <li>{"0.02% to the CLS treasury"}</li>
                 </div>
               }
             >
@@ -1047,20 +1047,20 @@ const Swap = () => {
           </Grid>
           <Grid item>{swapPath.join(" > ")}</Grid>
         </Grid>
-        {token0.title === "TIFI" ? (
+        {token0.title === "CLS" ? (
           <Grid container justifyContent="space-between" alignItems="center">
             <Grid item>
-              {"TIFI Sell Fee"}{" "}
+              {"CLS Sell Fee"}{" "}
               <Tooltip
                 title={
                   <div>
-                    {"There is 2% of fee when selling TIFI, check "}
+                    {"There is 2% of fee when selling CLS, check "}
                     <a
-                      href="https://tifi.net/about/TiFiTokenWhitePaper.pdf"
+                      href="https://cls.net/about/CLSTokenWhitePaper.pdf"
                       rel="noreferrer"
                       target="_blank"
                     >
-                      {"TiFi Token Whitepaper"}
+                      {"CLS Token Whitepaper"}
                     </a>
                     {" for more details."}
                   </div>
@@ -1074,20 +1074,20 @@ const Swap = () => {
         ) : (
           ""
         )}
-        {token1.title === "TIFI" ? (
+        {token1.title === "CLS" ? (
           <Grid container justifyContent="space-between" alignItems="center">
             <Grid item>
-              {"TIFI Buy Fee"}
+              {"CLS Buy Fee"}
               <Tooltip
                 title={
                   <div>
-                    {"There is 1% of fee when buying TIFI, check "}
+                    {"There is 1% of fee when buying CLS, check "}
                     <a
-                      href="https://tifi.net/about/TiFiTokenWhitePaper.pdf"
+                      href="https://cls.net/about/CLSTokenWhitePaper.pdf"
                       rel="noreferrer"
                       target="_blank"
                     >
-                      {"TiFi Token Whitepaper"}
+                      {"CLS Token Whitepaper"}
                     </a>
                     {" for more details."}
                   </div>

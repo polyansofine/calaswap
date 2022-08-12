@@ -6,7 +6,7 @@ export const TOKENS = [
     apiId: "bnb",
   },
   {
-    address: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+    address: "0x8FAbF85E96DD40dE46E184268Cf4571402228b5B",
     title: "BUSD",
     description: "BUSD Token",
     apiId: "binance-usd",
@@ -17,10 +17,10 @@ export const TOKENS = [
     description: "Calaswap",
     apiId: "calaswap",
   },
-  {
-    address: "0x55d398326f99059fF775485246999027B3197955",
-    title: "USDT",
-    description: "Tether",
-    apiId: "tether",
-  },
+  // {
+  //   address: "0x55d398326f99059fF775485246999027B3197955",
+  //   title: "USDT",
+  //   description: "Tether",
+  //   apiId: "tether",
+  // },
 ];

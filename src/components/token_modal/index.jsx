@@ -17,7 +17,7 @@ import ClearOutlinedIcon from "@mui/icons-material/ClearOutlined";
 import * as tokenActions from "store/actions";
 import { useDispatch, useSelector } from "react-redux";
 // import { ROOT_PATH } from "../../../config/constants";
-import { encodedPairs, encodePair } from "utils/tifi";
+import { encodedPairs, encodePair } from "utils/cls";
 // import useTranslation from "../../../context/Localization/useTranslation";
 
 export const TYPE_SWAP = "TYPE_SWAP";
