@@ -5,6 +5,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Swap from "../Swap";
+import Liquidity from "../liquidity";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -91,7 +92,7 @@ export default function ExchangeTabs() {
         <Swap />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <Liquidity />
       </TabPanel>
       <TabPanel value={value} index={2}>
         Item Three

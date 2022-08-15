@@ -17,6 +17,7 @@ const allTheme = createTheme({
   },
   typography: {
     color: "#ffffff",
+    fontFamily: "Kanit, sans-serif",
     h3: {
       color: "#ffffff",
       fontSize: "1.3125rem",

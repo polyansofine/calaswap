@@ -10,7 +10,7 @@ import ExchangeTabs from "./ExchangeTabs";
 import exchangeTheme from "theme/exchangeTheme";
 const Root = styled(Paper)(({ theme }) => ({
   width: "500px",
-  //   height: "800px",
+  minHeight: "400px",
   borderRadius: 16,
   padding: "30px 8px",
 }));
