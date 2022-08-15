@@ -10,13 +10,13 @@ import { simpleRpcProvider } from "./providers";
  * Recreate web3 instance only if the provider change
  */
 const useActiveWeb3React = () => {
-    const { library, chainId, ...web3React } = useWeb3React();
+  const { library, chainId, ...web3React } = useWeb3React();
 
-    return {
-        library: library || simpleRpcProvider,
-        chainId: chainId ?? parseInt("56", 10),
-        ...web3React,
-    };
+  return {
+    library: library || simpleRpcProvider,
+    chainId: chainId ?? parseInt("97", 10),
+    ...web3React,
+  };
 };
 
 export default useActiveWeb3React;

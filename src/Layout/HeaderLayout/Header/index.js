@@ -1,5 +1,6 @@
 import { AppBar, Grid, Toolbar } from "@mui/material";
-import WalletConnect from "components/WalletConnect";
+// import WalletConnect from "components/WalletConnect";
+import WalletConnectButton from "components/WalletConnectButton";
 import React from "react";
 
 const Header = () => {
@@ -9,7 +10,7 @@ const Header = () => {
         <Toolbar>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <WalletConnect />
+              <WalletConnectButton />
             </Grid>
           </Grid>
         </Toolbar>

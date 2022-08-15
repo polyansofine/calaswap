@@ -2,7 +2,7 @@ import {
   Button,
   CircularProgress,
   Collapse,
-  Fab,
+  // Fab,
   Grid,
   IconButton,
   InputBase,
@@ -19,7 +19,7 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import HelpIcon from "@mui/icons-material/Help";
 
 // import arrows from "assets/icons/arrows.svg";
-import arrows_horizontal from "assets/icons/arrows_horizontal.svg";
+// import arrows_horizontal from "assets/icons/arrows_horizontal.svg";
 import TokenSearchModal from "components/token_modal";
 import { useDispatch, useSelector } from "react-redux";
 import * as fuseActions from "store/actions";
@@ -41,7 +41,8 @@ import { BASE_BSC_SCAN_URLS } from "components/WalletConnectButton/config";
 import getPrice from "contract/abi/GetPrice.json";
 import metamask from "assets/icons/Metamask-icon.svg";
 import CachedIcon from "@mui/icons-material/Cached";
-import WalletConnect from "components/WalletConnect";
+// import WalletConnect from "components/WalletConnect";
+import WalletConnectButton from "components/WalletConnectButton";
 
 const StyledDiv = styled("div")(({ theme }) => ({
   border: "2px solid #cccccc",
@@ -799,15 +800,20 @@ const Swap = () => {
             <Typography>From</Typography>
           </Grid>
           <Grid item>
-            <Grid container justifyContent="flex-end" alignItems="center">
+            <Grid
+              container
+              justifyContent="flex-end"
+              alignItems="center"
+              columnSpacing={2}
+            >
               <Grid item>
                 {token0.title !== "BNB" && (
-                  <IconButton onClick={() => handleAddToken(0)}>
+                  <IconButton size="small" onClick={() => handleAddToken(0)}>
                     <img
                       src={metamask}
                       alt="metamask"
-                      width="20px"
-                      height="20px"
+                      width="15px"
+                      height="15px"
                     />
                   </IconButton>
                 )}
@@ -859,8 +865,8 @@ const Swap = () => {
         </Grid>
       </StyledDiv>
       <Grid container justifyContent="center" sx={{ my: 3 }}>
-        <Fab
-          size="small"
+        <IconButton
+          size="large"
           onClick={() => {
             setRefresh(false);
             setPriceImpact("NA");
@@ -870,7 +876,7 @@ const Swap = () => {
           onMouseLeave={() => setHoverOnSwitch(false)}
         >
           {hoverOnSwitch ? <SwapVertIcon /> : <ArrowDownwardIcon />}
-        </Fab>
+        </IconButton>
       </Grid>
       <StyledDiv>
         <Grid container justifyContent="space-between">
@@ -878,15 +884,20 @@ const Swap = () => {
             <Typography>To(estimated)</Typography>
           </Grid>
           <Grid item>
-            <Grid container justifyContent="flex-end" alignItems="center">
+            <Grid
+              container
+              justifyContent="flex-end"
+              alignItems="center"
+              columnSpacing={2}
+            >
               <Grid item>
                 {token1.title !== "BNB" && (
-                  <IconButton onClick={() => handleAddToken(1)}>
+                  <IconButton size="small" onClick={() => handleAddToken(1)}>
                     <img
                       src={metamask}
                       alt="metamask"
-                      width="20px"
-                      height="20px"
+                      width="15px"
+                      height="15px"
                     />
                   </IconButton>
                 )}
@@ -990,7 +1001,7 @@ const Swap = () => {
           </Button>
         )
       ) : (
-        <WalletConnect type />
+        <WalletConnectButton type />
       )}
       {/* <Button fullWidth variant="contained" sx={{ my: 3 }}>
         Insufficlent BNB balance

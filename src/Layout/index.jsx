@@ -22,12 +22,23 @@ import { Button, styled } from "@mui/material";
 import SidebarItem from "./SidebarWrapper/SidebarItem";
 import { SIDEBAR } from "constant/sidebar";
 import WalletConnect from "components/WalletConnect";
+import WalletConnectButton from "components/WalletConnectButton";
+import * as authActions from "store/actions";
+import { useWeb3React } from "@web3-react/core";
+import { useDispatch } from "react-redux";
 
 const drawerWidth = 300;
 
 function Layout(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { account, library } = useWeb3React();
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    if (account && library) {
+      dispatch(authActions.login(account, library));
+    }
+  }, [account, library]);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -78,7 +89,7 @@ function Layout(props) {
             Responsive drawer
           </Typography> */}
           <Box sx={{ flexGrow: 1 }}></Box>
-          <WalletConnect />
+          <WalletConnectButton />
         </Toolbar>
       </AppBar>
       <Box
